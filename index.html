@@ -5,21 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プレゼント受け取りページ</title>
 
-<!-- TikTok Pixel Code Start -->
 <script>
 !function (w, d, t) {
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-
   ttq.load('D6NUF1BC77UCRHPRIF80');
   ttq.page();
 }(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+
+// LINEへ飛ばす前に確実にClickButtonを計測する関数
+function trackLineAndRedirect(e) {
+    e.preventDefault(); 
+    var url = e.currentTarget.href;
     
-    <style>
+    // イベント名を「ClickButton」に固定
+    ttq.track('ClickButton'); 
+    
+    // 0.3秒待ってから移動（計測の成功率を上げます）
+    setTimeout(function() {
+        window.location.href = url;
+    }, 300);
+}
+</script>
+<style>
         body {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f4f7f6;
@@ -61,7 +71,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
         .notice {
             font-size: 14px;
-            color: #e63946; /* 注意を引くために少し赤っぽくしています */
+            color: #e63946;
             font-weight: bold;
             margin-top: 15px;
             line-height: 1.6;
@@ -78,7 +88,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <div class="container">
     <h1>公式LINEを追加して<br>プレゼントを受け取ってください</h1>
     
-    <a href="https://lin.ee/z0cMQLj" class="line-button" onclick="ttq.track('ClickButton')">
+    <a href="https://lin.ee/z0cMQLj" class="line-button" onclick="trackLineAndRedirect(event)">
         LINE友だち追加する
     </a>
 
